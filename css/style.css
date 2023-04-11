@@ -1,0 +1,44 @@
+/* .nav{
+    background-color: #b36981;
+} */
+
+/* .body{
+    background-color: #b36981;
+} */
+
+.text-center{
+    text-align: center;
+}
+
+.w-50{
+    width: 50%;
+}
+
+.pt-10{
+    padding: 10px;
+}
+
+.negrita{
+    font-weight: bold;
+}
+
+.letter{
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-weight: bold;
+}
+
+.min-letter{
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-family: cursive;
+    font-size: 15px;
+}
+
+.max-letter{
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-weight: bolder;
+    font-size: 33px;
+}
+
+.gradiente-musica{
+    background-image: linear-gradient(to top, #a8edea 0%, #fed6e3 100%);
+}
