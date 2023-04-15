@@ -6,39 +6,57 @@
     background-color: #b36981;
 } */
 
-.text-center{
+/* .text-center{
     text-align: center;
-}
+} */
 
-.w-50{
+/* .w-50{
     width: 50%;
-}
+} */
 
-.pt-10{
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+.pt-10 {
     padding: 10px;
 }
 
-.negrita{
+.negrita {
     font-weight: bold;
 }
 
-.letter{
-    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+.letter {
+    font-family: 'Roboto', sans-serif;
     font-weight: bold;
 }
 
-.min-letter{
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+.min-letter {
+    font-family: 'Roboto', sans-serif;
     font-family: cursive;
     font-size: 15px;
 }
 
-.max-letter{
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+.max-letter {
+    font-family: 'Roboto', sans-serif;
     font-weight: bolder;
     font-size: 33px;
 }
 
-.gradiente-musica{
+.gradiente-musica {
     background-image: linear-gradient(to top, #a8edea 0%, #fed6e3 100%);
+}
+
+footer {
+    background-color: #f1f1f1;
+}
+
+.copy {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.h-250 {
+    height: 250px;
+}
+
+.w-250 {
+    width: 250px;
 }
