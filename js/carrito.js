@@ -13,6 +13,17 @@ function offer(amount) {
   const discount = priceWDiscount * (percentage / 100);
   return priceWDiscount - discount;
 }
+//solo sea numero
+function getValidNumberInput() {
+  let input;
+  do {
+    input = prompt("¿Cuantas deseas comprar?");
+    if (isNaN(input)) {
+      alert("Asegúrate de ingresar un número válido.");
+    }
+  } while (isNaN(input));
+  return parseInt(input);
+}
 
 //función para los precios de las faldas
 function details(cost) {
@@ -135,8 +146,8 @@ function size(price, lookFor) {
   }
 }
 
-let exitFlag = false;
-while (!exitFlag) {
+let exit = false;
+while (!exit) {
   toDo = prompt(
     "¿Que es lo que desea ver?: 1 Zapatillas/ 2 Faldas / 3 Leotardos"
   );
@@ -145,7 +156,7 @@ while (!exitFlag) {
     case "1":
       alert("Estas en la seccón de zapatillas🩰");
       alert(
-        "❗❗HAY OFERTAS DISPONIBLES, POR LA COMPRA DE DOS ZAPATILLAS BLOCH EUROPEA TIENES EL 25% DE DESCUENTO❗❗"
+        "❗❗HAY OFERTAS DISPONIBLES, POR LA COMPRA DE DOS O MAS ZAPATILLAS BLOCH EUROPEA TIENES EL 25% DE DESCUENTO❗❗"
       );
       //eleccion de zapatillas
       do {
@@ -168,16 +179,28 @@ while (!exitFlag) {
         }
       } while (true);
       //cantidad
-      amount = parseInt(prompt("¿Cuantas deseas comprar?"));
-      if (amount === 2 && election === "bloch europea") {
-        alert("Estamos trabajando en el descuento...");
-        total = offer(amount);
-        alert(`El precio con descuento es $: ${total}`);
-      } else {
-        alert(
-          "Esta cantidad o la opcion de la zapatilla no es valida para aplicar el descuento, lo siento"
-        );
-      }
+      //   let amount;
+      const discountAmount = 2;
+      //   let election = "bloch europea";
+
+      do {
+        amount = getValidNumberInput();
+        if (amount >= 2 && election === "bloch europea") {
+          alert("Estamos trabajando en el descuento...");
+          total = offer(amount);
+          alert(`El precio con descuento es $: ${total}`);
+          break;
+        } else if (amount !== discountAmount) {
+          alert(
+            "Esta cantidad no tiene descuento o asegurate de haber escrito un número, te redirigiremos a la cantidad con descuento."
+          );
+        } else {
+          alert(
+            "Esta cantidad o la opcion de la zapatilla no es valida para aplicar el descuento, lo siento"
+          );
+        }
+      } while (true);
+
       //respuesta de compra
       let answer = prompt("¿Desea comprarlos? 1 SI  / 2 NO ").toLowerCase();
       if (answer === "1") {
@@ -239,5 +262,5 @@ while (!exitFlag) {
       );
       continue;
   }
-  break;
-}let again = prompt("¿Desea hacer una otra compra?")
+}
+let again = prompt("¿Desea hacer una otra compra?");
