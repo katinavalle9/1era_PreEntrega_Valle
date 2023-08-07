@@ -64,82 +64,27 @@ function details(cost) {
 function size(price, lookFor) {
   let stock;
   let paymentOfThings;
-
-  switch (lookFor) {
-    case 1:
-      if (lookFor === 1) {
-        stock = parseInt(prompt("¿Cuantas piezas quiere comprar?"));
-        if (isNaN(stock) || stock <= 0) {
-          alert("Por favor, ingrese una cantidad válida para las piezas.");
-          return 0;
-        }
-        paymentOfThings = stock * price;
-
-        let confirmation = confirm(
-          `El precio total es de $${paymentOfThings}.00MXN. ¿Quieres proceder con la compra?`
-        );
-
-        if (confirmation) {
-          alert("¡Muchas gracias por tu compra!😊");
-        } else {
-          alert("¡Gracias por visitarnos!");
-        }
-        return paymentOfThings;
-      } else {
-        alert("Por favor, ingrese una opción válida para su talla.");
-      }
-      break;
-    case 2:
-      if (lookFor === 2) {
-        stock = parseInt(prompt("¿Cuantas piezas quiere comprar?"));
-        if (isNaN(stock) || stock <= 0) {
-          alert("Por favor, ingrese una cantidad válida para las piezas.");
-          return 0;
-        }
-        paymentOfThings = stock * price;
-
-        let confirmation = confirm(
-          `El precio total es de $${paymentOfThings}.00MXN. ¿Quieres proceder con la compra?`
-        );
-
-        if (confirmation) {
-          alert("¡Muchas gracias por tu compra!😊");
-        } else {
-          alert("¡Gracias por visitarnos!");
-        }
-        return paymentOfThings;
-      } else {
-        alert("Por favor, ingrese una opción válida para su talla.");
-      }
-      break;
-    case 3:
-      if (lookFor === 3) {
-        stock = parseInt(prompt("¿Cuantas piezas quiere comprar?"));
-        alert("¡Felicidades usted acaba de recibir un cupón por su compra🙂");
-        if (isNaN(stock) || stock <= 0) {
-          alert("Por favor, ingrese una cantidad válida para las piezas.");
-          return 0;
-        }
-        paymentOfThings = stock * price;
-
-        let confirmation = confirm(
-          `El precio total es de $${paymentOfThings}.00MXN. ¿Quieres proceder con la compra?`
-        );
-
-        if (confirmation) {
-          alert("¡Muchas gracias por tu compra!😊");
-        } else {
-          alert("¡Gracias por visitarnos!");
-        }
-        return paymentOfThings;
-      } else {
-        alert("Por favor, ingrese una opción válida para su talla.");
-      }
-      break;
-    default:
-      alert("Por favor, ingrese una opción válida para su talla.");
-      break;
+  do {
+    stock = parseInt(prompt("¿Cuantas piezas quiere comprar?"));
+    if (isNaN(stock) || stock <= 0) {
+      alert("Por favor, ingrese una cantidad válida para las piezas.");
+    }
+  } while (isNaN(stock) || stock <= 0);
+  if (lookFor === 3) {
+    alert("¡Felicidades usted acaba de recibir un cupón por su compra🙂");
   }
+  paymentOfThings = stock * price;
+
+  let confirmation = confirm(
+    `El precio total es de $${paymentOfThings}.00MXN. ¿Quieres proceder con la compra?`
+  );
+
+  if (confirmation) {
+    alert("¡Muchas gracias por tu compra!😊");
+  } else {
+    alert("¡Gracias por visitarnos!");
+  }
+  return paymentOfThings;
 }
 
 let exit = false;
@@ -211,7 +156,6 @@ while (!exit) {
       let color;
       //eleccion de color
       do {
-        debugger;
         color = parseInt(
           prompt(
             "Tenemos colores disponibles como: 1 Negro / 2 Morado / 3 Rosado / 4 Floreado ,¿Cual te gustaría?"
@@ -249,9 +193,7 @@ while (!exit) {
         paymentOfThings = size(469, lookFor);
       } else if (lookFor === 3) {
         paymentOfThings = size(500, lookFor);
-      } else {
-        alert("Por favor, ingrese una opción válida para su talla.");
-      }
+      } 
       break;
     default:
       alert(
