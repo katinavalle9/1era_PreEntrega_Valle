@@ -27,30 +27,26 @@ function getValidNumberInput() {
 
 //función para los precios de las faldas
 function details(cost) {
-  large = parseInt(
-    prompt(
-      "Tenemos en dos presentaciones: 1 corta y  2 larga , ¿cual te gustaría?"
-    )
-  );
-  if (isNaN(large) || (large !== 1 && large !== 2)) {
-    alert("Por favor, ingrese una opción válida para la presentación.");
-    return;
-  }
+  do {
+    large = parseInt(
+      prompt(
+        "Tenemos en dos presentaciones: 1 corta y  2 larga , ¿cual te gustaría?"
+      )
+    );
+    if (isNaN(large) || (large !== 1 && large !== 2)) {
+      alert("Por favor, ingrese una opción válida para la presentación.");
+    }
+  } while (isNaN(large) || (large !== 1 && large !== 2));
 
   let pieces;
-  if (large === 1) {
-    pieces = parseInt(
-      prompt("¿Cuantas serán la cantidad de piezas que quiere comprar?")
-    );
-    totalAmount = pieces * cost;
-  } else {
+  do {
     pieces = parseInt(prompt("¿Cuantas piezas quiere comprar?"));
+    debugger;
     if (isNaN(pieces) || pieces <= 0) {
       alert("Por favor, ingrese una cantidad válida para las piezas.");
-      return 0;
     }
-    let = totalAmount = pieces * cost;
-  }
+  } while (isNaN(pieces));
+  let totalAmount = pieces * cost;
 
   let confirmation = confirm(
     `El precio total es de $${totalAmount}.00MXN. ¿Quieres proceder con la compra?`
@@ -215,6 +211,7 @@ while (!exit) {
       let color;
       //eleccion de color
       do {
+        debugger;
         color = parseInt(
           prompt(
             "Tenemos colores disponibles como: 1 Negro / 2 Morado / 3 Rosado / 4 Floreado ,¿Cual te gustaría?"
@@ -263,4 +260,4 @@ while (!exit) {
       continue;
   }
 }
-let again = prompt("¿Desea hacer una otra compra?");
+let again = prompt("¿Desea hacer otra compra?");
