@@ -1,243 +1,119 @@
-alert("BIENVENIDX A DANZARÉ, ESPERO SEA DE TU AGRADO 😉");
-
-let toDo;
-let election;
-
-let unitPrice = 2150;
-total = 0;
-percentage = 25;
-
-//función para aplicar el descuento de las zapatillas bloch europea
-function offer(amount) {
-  const priceWDiscount = unitPrice * amount;
-  const discount = priceWDiscount * (percentage / 100);
-  return priceWDiscount - discount;
-}
-
-//función para los precios de las faldas
-function details(cost) {
-  large = parseInt(
-    prompt(
-      "Tenemos en dos presentaciones: 1 corta y  2 larga , ¿cual te gustaría?"
-    )
-  );
-  if (isNaN(large) || (large !== 1 && large !== 2)) {
-    alert("Por favor, ingrese una opción válida para la presentación.");
-    return;
-  }
-
-  let pieces;
-  if (large === 1) {
-    pieces = parseInt(
-      prompt("¿Cuantas serán la cantidad de piezas que quiere comprar?")
+//funcion principal
+function main() {
+  let opcion;
+  let opcionValida = false;
+  while (!opcionValida) {
+    opcion = parseInt(
+      prompt(
+        "BIENVENIDX A DANZARÉ\n¿Que es lo que desea hacer?:\n1 Ver Zapatillas\n2 Ver Faldas\n3 Ver Leotardos\n4 Salir"
+      )
     );
-    totalAmount = pieces * cost;
-  } else {
-    pieces = parseInt(prompt("¿Cuantas piezas quiere comprar?"));
-    if (isNaN(pieces) || pieces <= 0) {
-      alert("Por favor, ingrese una cantidad válida para las piezas.");
-      return 0;
+    console.log(opcion);
+    //valido quela opcion sea u numero y entre en el rango del numero de opciones
+    if (!isNaN(opcion) && opcion >= 1 && opcion <= 4) {
+      opcionValida = true;
+    } else {
+      alert("Opción Inválida.\nIngrese una opción correcta para continuar");
     }
-    let = totalAmount = pieces * cost;
   }
-
-  let confirmation = confirm(
-    `El precio total es de $${totalAmount}.00MXN. ¿Quieres proceder con la compra?`
-  );
-
-  if (confirmation) {
-    alert("¡Muchas gracias por tu compra!😊");
+  if (opcion === 4) {
+    alert("Gracias por visitarnos, esperamos que vuelva pronto");
   } else {
-    alert("¡Gracias por visitarnos!");
+    carrito(opcion);
   }
-  return totalAmount;
 }
+//se llama la funcion para que se ejecute
+main();
 
-//funtion para las tallas
-function size(price, lookFor) {
-  let stock;
-  let paymentOfThings;
+function carrito(idCategoria) {
+  let opcionProductoValida = false;
+  let categoria = categorias.filter((c) => c.id == idCategoria)[0];
+  let text = `¿Que ${categoria.descripcion} deseas llevarte?\n`;
+  let productosFiltrados = productosFiltradosConDescripcion(idCategoria);
+  let cantidadValida = false;
+  let cantidad;
+  let precioTotal = 0;
+  let descuento = 0;
+  let precioFinal = 0;
+  let opcionProducto;
+  text += productosFiltrados.text;
 
-  switch (lookFor) {
-    case 1:
-      if (lookFor === 1) {
-        stock = parseInt(prompt("¿Cuantas piezas quiere comprar?"));
-        if (isNaN(stock) || stock <= 0) {
-          alert("Por favor, ingrese una cantidad válida para las piezas.");
-          return 0;
-        }
-        paymentOfThings = stock * price;
+  //se valida si es correcta la opcion ingresada, si es un numero y si se encuentra en el rango de numero
+  while (!opcionProductoValida) {
+    opcionProducto = parseInt(prompt(text));
+    if (
+      !isNaN(opcionProducto) &&
+      opcionProducto >= 1 &&
+      opcionProducto <= productosFiltrados.posicion
+    ) {
+      opcionProductoValida = true;
+    } else {
+      alert("Opción Inválida.\nIngrese una opción correcta para continuar");
+    }
+  }
 
-        let confirmation = confirm(
-          `El precio total es de $${paymentOfThings}.00MXN. ¿Quieres proceder con la compra?`
-        );
+  console.log("Se ingresó una opción correcta");
+  if (opcionProducto === productosFiltrados.posicion) {
+    main();
+  } else {
+    let producto = productosFiltrados.productos[opcionProducto - 1];
+    let confimarProducto = confirm(
+      `Usted seleccionó el producto: ${producto.nombre}\n¿Desea continuar?\nDe lo contrario será redirigido al menú anterior`
+    );
+    if (!confimarProducto) carrito(idCategoria);
 
-        if (confirmation) {
-          alert("¡Muchas gracias por tu compra!😊");
-        } else {
-          alert("¡Gracias por visitarnos!");
-        }
-        return paymentOfThings;
+    if (producto.tienePromocion) {
+      alert(
+        `EL PRODUCTO ${producto.nombre} TIENE UN DESCUENTO DE ${producto.porcentajePromocion}% EN LA COMPRA DE ${producto.cantidadPromocion} O MAS PIEZAS`
+      );
+    }
+    console.log(producto);
+
+    while (!cantidadValida) {
+      cantidad = parseInt(prompt(`Ingrese la cantidad de piezas que desea comprar del ${producto.nombre}`));
+      if (!isNaN(cantidad) && cantidad > 0) {
+        cantidadValida = true;
       } else {
-        alert("Por favor, ingrese una opción válida para su talla.");
+        alert("La cantidad ingresada no es un número válido");
       }
-      break;
-    case 2:
-      if (lookFor === 2) {
-        stock = parseInt(prompt("¿Cuantas piezas quiere comprar?"));
-        if (isNaN(stock) || stock <= 0) {
-          alert("Por favor, ingrese una cantidad válida para las piezas.");
-          return 0;
-        }
-        paymentOfThings = stock * price;
-
-        let confirmation = confirm(
-          `El precio total es de $${paymentOfThings}.00MXN. ¿Quieres proceder con la compra?`
-        );
-
-        if (confirmation) {
-          alert("¡Muchas gracias por tu compra!😊");
-        } else {
-          alert("¡Gracias por visitarnos!");
-        }
-        return paymentOfThings;
-      } else {
-        alert("Por favor, ingrese una opción válida para su talla.");
-      }
-      break;
-    case 3:
-      if (lookFor === 3) {
-        stock = parseInt(prompt("¿Cuantas piezas quiere comprar?"));
-        alert("¡Felicidades usted acaba de recibir un cupón por su compra🙂");
-        if (isNaN(stock) || stock <= 0) {
-          alert("Por favor, ingrese una cantidad válida para las piezas.");
-          return 0;
-        }
-        paymentOfThings = stock * price;
-
-        let confirmation = confirm(
-          `El precio total es de $${paymentOfThings}.00MXN. ¿Quieres proceder con la compra?`
-        );
-
-        if (confirmation) {
-          alert("¡Muchas gracias por tu compra!😊");
-        } else {
-          alert("¡Gracias por visitarnos!");
-        }
-        return paymentOfThings;
-      } else {
-        alert("Por favor, ingrese una opción válida para su talla.");
-      }
-      break;
-    default:
-      alert("Por favor, ingrese una opción válida para su talla.");
-      break;
+    }
+    precioTotal = cantidad * producto.precio;
+    if (producto.tienePromocion && cantidad >= producto.cantidadPromocion) {
+      descuento = (precioTotal / 100) * producto.porcentajePromocion;
+    }
+    precioFinal = precioTotal - descuento;
+    let confirmarCompra = confirm(
+      `Danzaré\nProducto:\t\t${producto.nombre}\nPrecio Total:....................$${precioTotal}\nDescuento:....................-$${descuento}\nPrecio Final:....................$${precioFinal}\n¿Desea confirmar su compra?\nDe lo contrario será regresado al menú anterior`
+    );
+    if (!confirmarCompra) carrito(idCategoria);
+    alert("Gracias por su compra, será redirigido al menú principal");
+    main();
   }
 }
 
-let exitFlag = false;
-while (!exitFlag) {
-  toDo = prompt(
-    "¿Que es lo que desea ver?: 1 Zapatillas/ 2 Faldas / 3 Leotardos"
+//funcion para realizar el filtrado por categoria
+function productosFiltradosConDescripcion(idCategoria) {
+  let productosFiltrados = productos.filter(
+    (p) => p.idCategoria === idCategoria
   );
-  switch (toDo) {
-    //Zapatillas
-    case "1":
-      alert("Estas en la seccón de zapatillas🩰");
-      alert(
-        "❗❗HAY OFERTAS DISPONIBLES, POR LA COMPRA DE DOS ZAPATILLAS BLOCH EUROPEA TIENES EL 25% DE DESCUENTO❗❗"
-      );
-      //eleccion de zapatillas
-      do {
-        election = prompt(
-          "¿Que zapatillas deseas llevarte? Bloch / Bloch Europea / Cameo / Capezio /  Capulet / Chacott"
-        ).toLowerCase();
-        if (election === "bloch europea") {
-          alert("Se te aplicará un descuento del 25%😱");
-          break;
-        } else if (
-          election === "bloch" ||
-          election === "cameo" ||
-          election === "capezio" ||
-          election === "capulet" ||
-          election === "chacott"
-        ) {
-          alert("Opción válida, pero esta zapatilla no tiene descuento.");
-        } else {
-          alert("Opción incorrecta. Por favor, ingrese una opción válida.");
-        }
-      } while (true);
-      //cantidad
-      amount = parseInt(prompt("¿Cuantas deseas comprar?"));
-      if (amount === 2 && election === "bloch europea") {
-        alert("Estamos trabajando en el descuento...");
-        total = offer(amount);
-        alert(`El precio con descuento es $: ${total}`);
-      } else {
-        alert(
-          "Esta cantidad o la opcion de la zapatilla no es valida para aplicar el descuento, lo siento"
-        );
-      }
-      //respuesta de compra
-      let answer = prompt("¿Desea comprarlos? 1 SI  / 2 NO ").toLowerCase();
-      if (answer === "1") {
-        alert("Gracias por su compra,vuelva pronto😊");
-      } else {
-        alert("Gracias por visitarnos🙂");
-      }
-      break;
-    //Faldas
-    case "2":
-      alert("Estas en la seccion de faldas✨");
-      let color;
-      //eleccion de color
-      do {
-        color = parseInt(
-          prompt(
-            "Tenemos colores disponibles como: 1 Negro / 2 Morado / 3 Rosado / 4 Floreado ,¿Cual te gustaría?"
-          )
-        );
-        if (isNaN(color) || color < 1 || color > 4)
-          alert("Por favor, ingrese una opción válida para el color.");
-      } while (color !== 1 && color !== 2 && color !== 3 && color !== 4);
-      //costos
-      if (color === 1) {
-        totalAmount = details(399);
-      } else if (color === 2) {
-        totalAmount = details(193);
-      } else if (color === 3) {
-        totalAmount = details(135);
-      } else if (color === 4) {
-        totalAmount = details(376);
-      } else {
-        alert("Por favor, ingrese una opción válida para el color.");
-      }
-      break;
-    //Leotardos
-    case "3":
-      let lookFor;
-      alert("Estas en la seccion de leotardos🩱");
-      do {
-        lookFor = parseInt(prompt("¿Que talla buscabas? 1 G / 2 M / 3 CH"));
-        if (isNaN(lookFor) || lookFor < 1 || lookFor > 3)
-          alert("Por favor, ingrese una opción válida para su talla.");
-      } while (lookFor !== 1 && lookFor !== 2 && lookFor !== 3);
-
-      if (lookFor === 1) {
-        paymentOfThings = size(471, lookFor);
-      } else if (lookFor === 2) {
-        paymentOfThings = size(469, lookFor);
-      } else if (lookFor === 3) {
-        paymentOfThings = size(500, lookFor);
-      } else {
-        alert("Por favor, ingrese una opción válida para su talla.");
-      }
-      break;
-    default:
-      alert(
-        "Respuesta incorrecta, por favor ingrese cualquier numero del menú"
-      );
-      continue;
-  }
-  break;
-}let again = prompt("¿Desea hacer una otra compra?")
+  let text = "";
+  let posicion = 1;
+  //se filtra por moneda
+  productosFiltrados.forEach((producto) => {
+    let tempMoneda = monedas.filter((m) => m.id === producto.idMoneda)[0];
+    //se concatena todo el texto con las propiedades de los arrays
+    let item = `${posicion} ${producto.nombre} (${tempMoneda.simbolo}${producto.precio} ${tempMoneda.nombre})`;
+    if (producto.tienePromocion) {
+      item += ` - EN LA COMPRA DE ${producto.cantidadPromocion} O MÁS PIEZAS OBTÉN EL ${producto.porcentajePromocion}% DE DESCUENTO`;
+    }
+    item += "\n";
+    text += item;
+    posicion++;
+  });
+  text += `${posicion} Regresar al menú anterior`;
+  return {
+    productos: productosFiltrados,
+    text: text,
+    posicion: posicion,
+  };
+}
