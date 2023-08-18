@@ -70,7 +70,7 @@ function carrito(idCategoria) {
     console.log(producto);
 
     while (!cantidadValida) {
-      cantidad = parseInt(prompt(`Ingrese la cantidad del ${producto.nombre}`));
+      cantidad = parseInt(prompt(`Ingrese la cantidad de piezas que desea comprar del ${producto.nombre}`));
       if (!isNaN(cantidad) && cantidad > 0) {
         cantidadValida = true;
       } else {
